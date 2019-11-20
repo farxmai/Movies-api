@@ -1,0 +1,38 @@
+.Home {
+    margin-top: 70px;
+}
+
+.Modal-back {
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    filter: blur(5px) brightness(0.5);
+    background-color: gray;
+  }
+
+.Modal {
+    padding-top: 70px;
+    z-index: 1000;
+    color: white;
+}
+
+
+.About {
+    margin-top: 70px;
+}
+.Favorite {
+    margin-top: 70px;
+}
+.PostList {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-around;
+    justify-content: center;  
+}
+
+.Poster {
+    margin: 2px;
+}
