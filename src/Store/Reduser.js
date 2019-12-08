@@ -4,7 +4,8 @@ import {
     ADD_TO_FAVORITE, 
     DELETE_FROM_FAVORITE,
     SET_CURRENT_PAGE,
-    SET_TOTAL_PAGES
+    SET_TOTAL_PAGES,
+    SEARCH_MOVIES
 } from "./Actions"
 
 
@@ -24,6 +25,15 @@ export const favoriteReduser = (state = [], action) => {
 export const moviesReduser = (state = [], action) => {
     switch (action.type) {
         case PAGE_OF_MOVIES:
+            return state = action.payload;
+        default:
+            return state 
+    }
+};
+
+export const saerchReduser = (state = '', action) => {
+    switch (action.type) {
+        case SEARCH_MOVIES:
             return state = action.payload;
         default:
             return state 

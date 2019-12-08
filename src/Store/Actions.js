@@ -4,6 +4,7 @@ export const ADD_TO_FAVORITE = "ADD_TO_FAVORITE";
 export const DELETE_FROM_FAVORITE = "DELETE_FROM_FAVORITE";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
+export const SEARCH_MOVIES = "SEARCH_MOVIES";
 
 
 
@@ -14,6 +15,18 @@ export const loadMovies = (currentPage) => {
         .then(data => dispatch(setMovies(data.results)) && dispatch(setTotalPages(data.total_pages)))
     }
 }
+
+export const searchMovies = (searchQuery, currentPage) => {
+    return dispatch => {
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c&language=en-US&query=${searchQuery}&page=${currentPage}&include_adult=true`)
+        .then(response => response.json())
+        .then(data => dispatch(setMovies(data.results)) && dispatch(setTotalPages(data.total_pages)))
+    }
+}
+export const setSearchQuery = (saerchString) => ({
+    type: SEARCH_MOVIES,
+    payload: saerchString
+})
 
 export const setMovies = (movies) => ({
     type: PAGE_OF_MOVIES,

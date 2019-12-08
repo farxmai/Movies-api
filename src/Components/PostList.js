@@ -1,15 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setPost } from "../Store/Actions"
 
-function PostList() {	
-	const movies = useSelector(state => state.movieList);
+function PostList(props) {	
+	
 	const dispatch = useDispatch()		
 	let i = 1;
 	return (			
-		movies.map(				
+		props.movies.map(				
 			p => 
 			<div className="m-2" key={p.id} id={i++} onClick={() => dispatch(setPost(p))}>
 				<Link to="/modal">

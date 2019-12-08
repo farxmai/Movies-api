@@ -5,6 +5,7 @@ import {
     favoriteReduser, 
     pageReduser,
     totalPageReduser,
+    saerchReduser
 } from "./Reduser"
 
 export default combineReducers ({
@@ -13,4 +14,5 @@ export default combineReducers ({
     favoriteList: favoriteReduser,
     currentPage: pageReduser,
     totalPages: totalPageReduser,
+    searchQuery: saerchReduser
 })
