@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 function Header() {
     return (    
         <Navbar bg="dark" expand="md" variant="dark" fixed="top">
-            <Navbar.Brand href="#home">Movies</Navbar.Brand>
+            <Navbar.Brand href="/">Movies</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">

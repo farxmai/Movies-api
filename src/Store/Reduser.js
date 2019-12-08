@@ -2,9 +2,11 @@ import {
     CHANGE_POST, 
     PAGE_OF_MOVIES, 
     ADD_TO_FAVORITE, 
-    DELETE_FROM_FAVORITE
+    DELETE_FROM_FAVORITE,
+    SET_CURRENT_PAGE,
+    SET_TOTAL_PAGES
 } from "./Actions"
-import {combineReducers} from "redux"
+
 
 export const favoriteReduser = (state = [], action) => {
     switch (action.type) {
@@ -37,8 +39,21 @@ export const postReduser = (state = {}, action) => {
     }
 };
 
-export default combineReducers ({
-    modalPost: postReduser,
-    movieList: moviesReduser,
-    favoriteList: favoriteReduser,
-})
+export const pageReduser = (state = 1, action) => {
+    switch (action.type) {
+        case SET_CURRENT_PAGE: 
+            return state = action.payload;
+        default:
+            return state 
+    }
+}
+
+export const totalPageReduser = (state = 1, action) => {
+    switch (action.type) {
+        case SET_TOTAL_PAGES: 
+            return state = action.payload;
+        default:
+            return state 
+    }
+}
+

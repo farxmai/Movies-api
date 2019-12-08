@@ -13,7 +13,7 @@ function FavoriteButton() {
     const dispatch = useDispatch();
     
     return (
-    !favoriteList.find(item => item.title == modalPost.title)
+    !favoriteList.find(item => item.title === modalPost.title)
         ? <Button variant="dark" onClick={() => dispatch(setFavorite(modalPost))}>Add To Favorite</Button> 
         : <Button variant="dark" onClick={() => dispatch(setUnFavorite(modalPost))}>Unfavorite</Button>
     )

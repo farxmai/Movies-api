@@ -6,23 +6,26 @@ import {
   Switch,
   Route,  
 } from "react-router-dom";
-import {createStore} from "redux"
-import {Provider} from "react-redux"
-import combineReducers from "./Store/Reduser"
-import Header from './Components/Header'
-import Home from './Pages/Home'
-import Modal from './Pages/Modal'
-import About from './Pages/About'
-import Favorite from './Pages/Favorite'
+import {createStore, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+import combineReducers from "./Store/Root";
+import Header from './Components/Header';
+import Home from './Pages/Home';
+import Modal from './Pages/Modal';
+import About from './Pages/About';
+import Favorite from './Pages/Favorite';
 
 function App() {
 
-  const store = createStore(combineReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  const store = createStore(combineReducers, composeWithDevTools(applyMiddleware(thunk)));
 
   return (
     <Provider store={store}>
       <Router>
         <Header />
+        <div className="Home">
         <Switch>
           <Route exact path="/">
             <Home />
@@ -37,6 +40,7 @@ function App() {
             <About />
           </Route>
         </Switch>
+        </div>
       </Router>
     </Provider>
   );

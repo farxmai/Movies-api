@@ -1,17 +1,34 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Jumbotron } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom";
 import { setUnFavorite } from "../Store/Actions"
 
-function Favoreite() {
+
+function Favorite() {
     const favoriteList = useSelector(state => state.favoriteList)
     const dispatch = useDispatch();
+    const history = useHistory();
     const options = {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
     };
-
+    if(favoriteList.length === 0) {
+        return (
+            <Jumbotron className="About jumbotron">
+            <h1 className="display-4">You dont have favorite movies yet</h1>
+            <hr className="my-4"/>
+            <p className="lead">
+                If You want add some movies to this list, you may press the button "add to favorite" in modal window!
+            </p>
+            <p>
+                <Button variant="primary" onClick={() => history.push("/")}>Check it!</Button>
+            </p>
+            </Jumbotron>
+            
+        )
+    }
     return(        
         favoriteList.map(            
             p => 
@@ -37,4 +54,4 @@ function Favoreite() {
     )      
 }
 
-export default Favoreite;
+export default Favorite;
