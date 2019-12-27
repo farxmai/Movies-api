@@ -12,8 +12,9 @@ function FavoriteButton() {
     const modalPost = useSelector(state => state.modalPost)
     const dispatch = useDispatch();
     
+    
     return (
-    !favoriteList.find(item => item.title === modalPost.title)
+    !favoriteList.find(item => item.title === modalPost.title) 
         ? <Button variant="dark" onClick={() => dispatch(setFavorite(modalPost))}>Add To Favorite</Button> 
         : <Button variant="dark" onClick={() => dispatch(setUnFavorite(modalPost))}>Unfavorite</Button>
     )
@@ -21,4 +22,3 @@ function FavoriteButton() {
 
 export default FavoriteButton;
 
-// favoriteList.includes(modalPost, 0) 

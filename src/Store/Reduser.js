@@ -12,10 +12,12 @@ import {
 export const favoriteReduser = (state = [], action) => {
     switch (action.type) {
         case ADD_TO_FAVORITE:
+            localStorage.setItem("favorite", JSON.stringify([...state, action.payload]))
             return [...state, action.payload];
         case DELETE_FROM_FAVORITE: 
         let newState = [...state]
         newState.splice( newState.indexOf(action.payload), 1)
+        localStorage.setItem("favorite", JSON.stringify(newState))
             return newState; 
         default:
             return state       

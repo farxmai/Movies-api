@@ -2,11 +2,13 @@ import React from 'react';
 import { Button, Jumbotron } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom";
-import { setUnFavorite } from "../Store/Actions"
+import { setUnFavorite, setFavorite } from "../Store/Actions"
 
 
 function Favorite() {
+
     const favoriteList = useSelector(state => state.favoriteList)
+    const LSfavorite = JSON.parse(localStorage.getItem("favorite"))               
     const dispatch = useDispatch();
     const history = useHistory();
     const options = {
@@ -14,25 +16,28 @@ function Favorite() {
         month: 'long',
         day: 'numeric',
     };
+
     if(favoriteList.length === 0) {
-        return (
-            <Jumbotron className="About jumbotron">
-            <h1 className="display-4">You dont have favorite movies yet</h1>
-            <hr className="my-4"/>
-            <p className="lead">
-                If You want add some movies to this list, you may press the button "add to favorite" in modal window!
-            </p>
-            <p>
-                <Button variant="primary" onClick={() => history.push("/")}>Check it!</Button>
-            </p>
-            </Jumbotron>
-            
-        )
+        if(LSfavorite.length === 0) {
+            return (
+                <Jumbotron className="About jumbotron">
+                <h1 className="display-4">You dont have favorite movies yet</h1>
+                <hr className="my-4"/>
+                <p className="lead">
+                    If You want add some movies to this list, you may press the button "add to favorite" in modal window!
+                </p>
+                <p>
+                    <Button variant="primary" onClick={() => history.push("/")}>Check it!</Button>
+                </p>
+                </Jumbotron>                
+            )
+        }
+        else {LSfavorite.map(movie => dispatch(setFavorite(movie)))}
     }
     return(        
         favoriteList.map(            
             p => 
-            <div  className="Favorite">
+            <div className="Favorite" key={p.id}>
                 <div className="m-4 d-column d-md-flex">
                     <div>
                     <img className="m-2 rounded-lg" alt={p.title} width="250" height="350" src={p.poster_path === null ? "https://www.elections.tn.gov.in/member/noimg.svg" : `http://image.tmdb.org/t/p/w342/${p.poster_path}`}></img>

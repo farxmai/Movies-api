@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { NavLink } from "react-router-dom";
-import { setSearchQuery } from '../Store/Actions'
-import { useDispatch } from "react-redux"
+import { Navbar, Nav, Form, FormControl, Button, ButtonGroup } from 'react-bootstrap';
+import { NavLink, useHistory } from "react-router-dom";
+import { setSearchQuery, setCurrentPage } from '../Store/Actions'
+import { useDispatch, useSelector } from "react-redux"
 
 function Header() {
+
     const dispatch = useDispatch()
+    const history = useHistory()
+    const SearchField = useSelector(state => state.searchQuery)
     const [searcInput, setSearcInput] = useState("")
     const search = (event) => {setSearcInput(event.target.value)}
-    const SearchQuery = () => {dispatch(setSearchQuery(searcInput))}
+    const SearchQuery = (string) => {
+        dispatch(setSearchQuery(string))
+        dispatch(setCurrentPage(1))
+        history.push("/")
+    }
+
     return (    
         <Navbar bg="dark" expand="md" variant="dark" fixed="top">
             <Navbar.Brand href="/">Movies</Navbar.Brand>
@@ -26,8 +34,12 @@ function Header() {
                 placeholder="Search" 
                 className="mr-sm-2" 
                 onChange={search}
+                defaultValue={SearchField}
                 />
-            <Button variant="outline-success" onClick={SearchQuery}>Search</Button>        
+            <ButtonGroup>
+                <Button variant="outline-success" onClick={() => SearchQuery(searcInput)}>Search</Button>
+                {SearchField !== "" ? <Button variant="outline-danger" onClick={() => SearchQuery("")}>Del</Button>: ""}
+            </ButtonGroup>        
             </Form>
         </Navbar.Collapse>
         </Navbar>

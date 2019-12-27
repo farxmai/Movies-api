@@ -6,6 +6,7 @@ import { setPost } from "../Store/Actions"
 import FavoriteButton from "../Components/FavoriteButton"
 
 
+
 function Modal() {
     const modalPost = useSelector(state => state.modalPost)
     const movieList = useSelector(state => state.movieList)
@@ -20,19 +21,20 @@ function Modal() {
       };
 
     const onNextClick = () => {
-        movieList.indexOf(modalPost) !== movieList.length - 1 ? dispatch(setPost(movieList[movieList.indexOf(modalPost) + 1])) : dispatch(setPost(movieList[0]))
+        dispatch(setPost(movieList[movieList.indexOf(modalPost) + 1]))
     }
     const onPrevClick = () => {
-        movieList.indexOf(modalPost) === 0 ? dispatch(setPost(movieList[0])) : dispatch(setPost(movieList[movieList.indexOf(modalPost) - 1]))
+        dispatch(setPost(movieList[movieList.indexOf(modalPost) - 1]))
     }
-       
+
+      
     return(
         <div>
             <div className="Modal-back" style={{backgroundImage : `url(http://image.tmdb.org/t/p/w342/${modalPost.poster_path})`}}></div>
             <div className="Modal">
                 <div className="m-4 d-flex justify-content-between">
-                    <Button type="button" className='btn btn-dark btn-lg' onClick={onPrevClick}>Prev movie</Button>
-                    <Button type="button" className='btn btn-dark btn-lg' onClick={onNextClick}>Next movie </Button> 
+                    <Button type="button" className='btn btn-dark btn-lg' disabled={movieList.indexOf(modalPost) === 0 && true} onClick={onPrevClick}>Prev movie</Button>
+                    <Button type="button" className='btn btn-dark btn-lg' disabled={movieList.indexOf(modalPost) === movieList.length - 1 && true} onClick={onNextClick}>Next movie </Button> 
                 </div>                
                 <div className="m-4 d-column d-md-flex">
                     <div className="m-2 justify-content-center">
