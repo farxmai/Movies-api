@@ -3,11 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux"
 import { setPost } from "../Store/Actions"
+import { Alert } from 'react-bootstrap';
 
 function PostList(props) {	
 	
 	const dispatch = useDispatch()		
 	let i = 1;
+
+	if(props.movies.length === 0) {
+		return (
+			<Alert variant='danger'>No results found</Alert>
+		)
+	}
 	return (			
 		props.movies.map(				
 			p => 
